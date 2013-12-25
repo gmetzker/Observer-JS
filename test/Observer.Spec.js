@@ -2,9 +2,6 @@ var global = Function('return this')();
 
 describe("dotBox.utility.Observer", function () {
 
-    //Alias
-    var Observer = gmetzker.Observer;
-
     describe("constructor", function () {
 
         it("can construct with new keyword", function () {

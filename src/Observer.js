@@ -1,37 +1,25 @@
-var gmetzker;
-gmetzker = gmetzker || {};
-
-
 /**
- * @typedef  {Object}   subscriber
- * @property {number}   priority    - The priority call order of this subscriber.
- * @property {function} callback    - The subscribers method to call during a publish.
- */
-
-/**
- * @typedef  {Object}  publishEvent
- * @property {boolean} cancel        - True if the subscriber callback wants to
- *                                     cancel the publish to any lower priority subscribers.
- * @property {number}  channelId     - The id that message subscription was published on.
- */
-
-/**
- * Returns a new Observer object.
- * @class
- * @classdesc This is an implementation of the Observer or pub/sub pattern.
- * Consumers subscribe and publish to 'channels' with a channel id.
- * This implementation has several unique features:
+ * An implementation of the Observer pattern with ordered subscribers and event canceling.
  *
- * 1.  The order of calls to any subscribers can be determined when the subscription is added.
- * A subscriber can specify an optional priority where the larger values indicate that the
- * subscriber wants to be executed first.  Any subscribers added without a priority are
- * called last.
+ * @author      Gary Metzker <gmetzker@gmail.com>
+ * @version     1.0.0
+ * @class       Observer
+ * @classdesc   This is an implementation of the Observer or pub/sub pattern.
+ *              Consumers subscribe and publish to 'channels' with a channel id.
+ *              This implementation has several unique features:
  *
- * 2.  Any subscriber can cancel the publish to any lower priority subscribers if
- * the subscriber sets this.cancel = true in the callback method.  The publish method
- * will return false if any subscriber canceled.
+ *              1.  The order of calls to any subscribers can be determined when
+ *              the subscription is added.  A subscriber can specify an optional
+ *              priority where the larger values indicate that the subscriber
+ *              wants to be executed first.  Any subscribers added without a
+ *              priority are called last.
+ *
+ *              2.  Any subscriber can cancel the publish to any lower priority
+ *              subscribers if the subscriber sets this.cancel = true in the
+ *              callback method.  The publish method will return false if any
+ *              subscriber canceled.
  */
-gmetzker.Observer = (function () {
+Observer = (function () {
 
     //Constructor
     var Observer;
@@ -55,7 +43,7 @@ gmetzker.Observer = (function () {
      * Adds a subscriber to the observer.  You can optionally choose to give
      * it a priority (bigger priorities are called first).  Subscribers with no
      * priority specified are called in order of when they were added.  If there
-     * are subscibers with a priority and without, then any priority subscribers
+     * are subscribers with a priority and without, then any priority subscribers
      * are called first followed by non-priority subscribers in the order they
      * were added.
      * @param {string}    channelId - The channel or type of messages that the subscriber wants to observe.
@@ -184,7 +172,7 @@ gmetzker.Observer = (function () {
 
 
     /**
-     * Search for any subscribers that are non-prioritied (their priorities are negative),
+     * Search for any subscribers that are non-prioritized (their priorities are negative),
      * and returns the next smallest number.
      * @private
      * @param   {subscriber[]} channel
@@ -250,6 +238,21 @@ gmetzker.Observer = (function () {
 
 }());
 
+
+
+
+/**
+ * @typedef  {Object}   subscriber
+ * @property {number}   priority    - The priority call order of this subscriber.
+ * @property {function} callback    - The subscribers method to call during a publish.
+ */
+
+/**
+ * @typedef  {Object}  publishEvent
+ * @property {boolean} cancel        - True if the subscriber callback wants to
+ *                                     cancel the publish to any lower priority subscribers.
+ * @property {number}  channelId     - The id that message subscription was published on.
+ */
 
 
 
