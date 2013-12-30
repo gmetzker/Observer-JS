@@ -26,3 +26,25 @@ Basic Pub-Sub
   Vader
 >
 ```
+
+Publish with arguments
+----------------------
+[Live Example](http://jsfiddle.net/gmetzker/PRb3Z/)
+* You can publish with any arguments
+* All arguments after the channel are passed to the subscribers.
+
+```javascript
+    var ob = new Observer();
+
+    ob.subscribe('some.event', function (greeting) { console.log(greeting + 'Luke'); });
+    ob.subscribe('some.event', function (greeting) { console.log(greeting + 'Vader'); });
+    
+    ob.publish('some.event', 'Hello ');
+
+```
+#### Output
+```
+  Hello Luke
+  Hello Vader
+>
+```
