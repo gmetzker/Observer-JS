@@ -7,8 +7,9 @@ A JavaScript observer implementation with subscription priority, and event cance
 Basic Pub-Sub
 -------------
 [Live Example](http://jsfiddle.net/gmetzker/Lz995/)
-* Add subscribers to a 'channel'.
-* Publish messages to a 'channel'.
+* Create a new instance: ```var ob = new Observer();```
+* Add subscribers to a channel:  ```ob.subscribe(channelId, subscriberFunc);```
+* Publish messages to a channel: ```ob.publish(channelId [, arg0, arg1, ...]);```
 
 ```javascript
     var ob = new Observer();
@@ -51,7 +52,8 @@ Publish with arguments
 this.channelId
 ---------
 [Live Example](http://jsfiddle.net/gmetzker/JBa6N/)
-** this.channelId** in the subscriber method will indicate the current channel.
+
+* **this.channelId** in the subscriber method will indicate the current channel.
 
 ```javascript
     var ob = new Observer();
