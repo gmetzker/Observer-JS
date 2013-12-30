@@ -40,11 +40,32 @@ Publish with arguments
     ob.subscribe('some.event', function (greeting) { console.log(greeting + 'Vader'); });
     
     ob.publish('some.event', 'Hello ');
-
 ```
 #### Output
 ```
   Hello Luke
   Hello Vader
+>
+```
+
+this.channelId
+---------
+[Live Example](http://jsfiddle.net/gmetzker/JBa6N/)
+** this.channelId** in the subscriber method will indicate the current channel.
+
+```javascript
+    var ob = new Observer();
+
+    ob.subscribe('some.event', function () { console.log(this.channelId + ' - Luke'); });
+    ob.subscribe('some.event', function () { console.log(this.channelId + ' - Vader'); });
+    ob.subscribe('some.event.other', function () { console.log(this.channelId + ' - Yoda'); });
+    
+    ob.publish('some.event');
+```
+
+#### Output
+```
+  some.event - Luke
+  some.event - Vader
 >
 ```
