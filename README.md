@@ -4,6 +4,7 @@ Observer-JS
 A JavaScript observer implementation with subscription priority, and event cancellation features.
 
 * [Basic Pub-Sub](#basic)
+* [Unsubscribe](#unsub)
 * [Publish with arguments](#pubargs)
 * [this.channelId](#thischannelid)
 * [Event Cancellation](#eventcancel)
@@ -32,6 +33,33 @@ ob.publish('some.event');
 ```
   Luke
   Vader
+>
+```
+
+<a name='unsub'></a>Unsubscribe
+-------------
+<a href="http://jsfiddle.net/gmetzker/VNkDF/" target="_blank">Live Example</a>
+
+* Unsubscribe to a channel: ```ob.unsubscribe(channelId, subscriberFunc);```
+
+```javascript
+var ob = new Observer();
+
+var vaderSub = function () { console.log('Vader'); };
+
+ob.subscribe('some.event', function () { console.log('Luke'); });
+ob.subscribe('some.event', vaderSub);
+ob.subscribe('some.event', function () { console.log('R2D2'); });
+
+ob.unsubscribe('some.event', vaderSub);
+
+ob.publish('some.event');
+```
+
+#### Output
+```
+  Luke
+  R2D2
 >
 ```
 
