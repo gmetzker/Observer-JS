@@ -3,8 +3,14 @@ Observer-JS
 
 A JavaScript observer implementation with subscription priority, and event cancellation features.
 
+* [Basic Pub-Sub](#basic)
+* [Publish with arguments](#pubargs)
+* [this.channelId](#thischannelid)
+* [Event Cancellation](#eventcancel)
+* [Subscriber Order](#suborder)
 
-Basic Pub-Sub
+
+<a name='basic'></a>Basic Pub-Sub
 -------------
 [Live Example](http://jsfiddle.net/gmetzker/Lz995/)
 * Create a new instance: ```var ob = new Observer();```
@@ -28,7 +34,7 @@ ob.publish('some.event');
 >
 ```
 
-Publish with arguments
+<a name='pubargs'></a>Publish with arguments
 ----------------------
 [Live Example](http://jsfiddle.net/gmetzker/PRb3Z/)
 * You can publish with any arguments
@@ -49,7 +55,7 @@ ob.publish('some.event', 'Hello ');
 >
 ```
 
-this.channelId
+<a name='thischannelid'></a>this.channelId
 ---------
 [Live Example](http://jsfiddle.net/gmetzker/JBa6N/)
 
@@ -72,7 +78,7 @@ ob.publish('some.event');
 >
 ```
 
-Event Cancellation
+<a name='eventcancel'></a>Event Cancellation
 -----------------
 [Live Example](http://jsfiddle.net/gmetzker/7AZ76/)
 * Any subscribers can cancel the event for all lower priority subscribers: ``` this.cancel = true;```
@@ -100,7 +106,7 @@ if( !complete ) { console.log('force.push failed!'); }
 >
 ```
 
-Subscriber Order
+<a name='suborder'></a>Subscriber Order
 ----------------
 [Live Example](http://jsfiddle.net/gmetzker/pPQ4a/)
 * Typically subscribers are executed in the order they were added.
