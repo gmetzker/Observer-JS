@@ -98,3 +98,11 @@ Event Cancellation
   force.push failed!
 >
 ```
+
+Subscriber Order
+----------------
+[Live Example]()
+* Typically subscribers are executed in the order they were added.
+* An optional priority value can be supplied to designate a specific order. ```ob.subscribe(channelId, callback, priority)```.  
+* Priority subscribers are executed in descending order from largest priority subscriber to the smallest.
+* If a channel has subscribers with and without priority specified then the subscribers without a priority are executed last.
