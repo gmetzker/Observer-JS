@@ -12,13 +12,13 @@ Basic Pub-Sub
 * Publish messages to a channel: ```ob.publish(channelId [, arg0, arg1, ...]);```
 
 ```javascript
-    var ob = new Observer();
+var ob = new Observer();
 
-    ob.subscribe('some.event', function () { console.log('Luke'); });
-    ob.subscribe('some.event', function () { console.log('Vader'); });
-    ob.subscribe('some.event.other', function () { console.log('Yoda'); });
-    
-    ob.publish('some.event');
+ob.subscribe('some.event', function () { console.log('Luke'); });
+ob.subscribe('some.event', function () { console.log('Vader'); });
+ob.subscribe('some.event.other', function () { console.log('Yoda'); });
+
+ob.publish('some.event');
 ```
 
 #### Output
@@ -35,12 +35,12 @@ Publish with arguments
 * All arguments after the channel are passed to the subscribers.
 
 ```javascript
-    var ob = new Observer();
+var ob = new Observer();
 
-    ob.subscribe('some.event', function (greeting) { console.log(greeting + 'Luke'); });
-    ob.subscribe('some.event', function (greeting) { console.log(greeting + 'Vader'); });
-    
-    ob.publish('some.event', 'Hello ');
+ob.subscribe('some.event', function (greeting) { console.log(greeting + 'Luke'); });
+ob.subscribe('some.event', function (greeting) { console.log(greeting + 'Vader'); });
+
+ob.publish('some.event', 'Hello ');
 ```
 #### Output
 ```
@@ -56,13 +56,13 @@ this.channelId
 * **this.channelId** in the subscriber method will indicate the current channel.
 
 ```javascript
-    var ob = new Observer();
+var ob = new Observer();
 
-    ob.subscribe('some.event', function () { console.log(this.channelId + ' - Luke'); });
-    ob.subscribe('some.event', function () { console.log(this.channelId + ' - Vader'); });
-    ob.subscribe('some.event.other', function () { console.log(this.channelId + ' - Yoda'); });
-    
-    ob.publish('some.event');
+ob.subscribe('some.event', function () { console.log(this.channelId + ' - Luke'); });
+ob.subscribe('some.event', function () { console.log(this.channelId + ' - Vader'); });
+ob.subscribe('some.event.other', function () { console.log(this.channelId + ' - Yoda'); });
+
+ob.publish('some.event');
 ```
 
 #### Output
@@ -81,15 +81,16 @@ Event Cancellation
 ```javascript
  var ob = new Observer();
 
-    ob.subscribe('force.push', function () { console.log('Luke: Ouch!'); });
-    ob.subscribe('force.push', function () { 
-        console.log('Ob1: Blocked');
-        this.cancel = true;
-    });
-    ob.subscribe('force.push', function () { console.log('Solo: Arg!'); });
-    
-    var complete = ob.publish('force.push');
-    if( !complete ) { console.log('force.push failed!'); }
+ob.subscribe('force.push', function () { console.log('Luke: Ouch!'); });
+
+ob.subscribe('force.push', function () { 
+    console.log('Ob1: Blocked');
+    this.cancel = true;
+});
+ob.subscribe('force.push', function () { console.log('Solo: Arg!'); });
+
+var complete = ob.publish('force.push');
+if( !complete ) { console.log('force.push failed!'); }
 ```
 #### Output
 ```
@@ -101,8 +102,35 @@ Event Cancellation
 
 Subscriber Order
 ----------------
-[Live Example]()
+[Live Example](http://jsfiddle.net/gmetzker/pPQ4a/)
 * Typically subscribers are executed in the order they were added.
 * An optional priority value can be supplied to designate a specific order. ```ob.subscribe(channelId, callback, priority)```.  
 * Priority subscribers are executed in descending order from largest priority subscriber to the smallest.
 * If a channel has subscribers with and without priority specified then the subscribers without a priority are executed last.
+
+
+```javascript
+var ob = new Observer();
+
+ob.subscribe('some.event', function () { console.log('Luke has no priority specified but was added first'); });
+
+ob.subscribe('some.event', function () { console.log('Yoda has a priority of 10'); }, 10);
+
+ob.subscribe('some.event', function () { console.log('Obi has no priority specified'); });
+
+ob.subscribe('some.event', function () { console.log('Chewy has the highest priority and will go first - 99');}, 99);
+
+ob.subscribe('some.event', function () { console.log('R2D2 has a priority of 5');}, 5);
+
+ob.publish('some.event');
+```
+
+#### Output
+```
+  Chewy has the highest priority and will go first - 99
+  Yoda has a priority of 10
+  R2D2 has a priority of 5
+  Luke has no priority specified but was added first
+  Obi has no priority specified
+>
+```
