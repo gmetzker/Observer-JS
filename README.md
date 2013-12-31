@@ -1,7 +1,7 @@
 Observer-JS
 ===========
 
-A JavaScript observer implementation with subscription priority, and event cancelation features.
+A JavaScript observer implementation with subscription priority, and event cancellation features.
 
 
 Basic Pub-Sub
@@ -69,5 +69,32 @@ this.channelId
 ```
   some.event - Luke
   some.event - Vader
+>
+```
+
+Event Cancellation
+-----------------
+[Live Example](http://jsfiddle.net/gmetzker/2Cev4/)
+* Any subscribers can cancel the event for all lower priority subscribers: ``` this.cancel = true;```
+* The result of the publish method indicates if the event was fully published ***(returns true)***, or canceled. ***(returns false)***
+
+```javascript
+ var ob = new Observer();
+
+    ob.subscribe('force.push', function () { console.log('Luke: Ouch!'); });
+    ob.subscribe('force.push', function () { 
+        console.log('Ob1: Blocked');
+        this.cancel = true;
+    });
+    ob.subscribe('force.push', function () { console.log('Solo: Arg!'); });
+    
+    var complete = ob.publish('force.push');
+    if( !complete ) { console.log('force.push failed!'); }
+```
+#### Output
+```
+  Luke: Ouch!
+  Ob1: Blocked
+  force.push failed!
 >
 ```
