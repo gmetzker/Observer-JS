@@ -12,7 +12,8 @@ A JavaScript observer implementation with subscription priority, and event cance
 
 <a name='basic'></a>Basic Pub-Sub
 -------------
-[Live Example](http://jsfiddle.net/gmetzker/Lz995/)
+<a href="http://jsfiddle.net/gmetzker/Lz995/" target="_blank">Live Example</a>
+
 * Create a new instance: ```var ob = new Observer();```
 * Add subscribers to a channel:  ```ob.subscribe(channelId, subscriberFunc);```
 * Publish messages to a channel: ```ob.publish(channelId [, arg0, arg1, ...]);```
@@ -36,7 +37,7 @@ ob.publish('some.event');
 
 <a name='pubargs'></a>Publish with arguments
 ----------------------
-[Live Example](http://jsfiddle.net/gmetzker/PRb3Z/)
+<a href="http://jsfiddle.net/gmetzker/PRb3Z/" target="_blank">Live Example</a>
 * You can publish with any arguments
 * All arguments after the channel are passed to the subscribers.
 
@@ -57,7 +58,7 @@ ob.publish('some.event', 'Hello ');
 
 <a name='thischannelid'></a>this.channelId
 ---------
-[Live Example](http://jsfiddle.net/gmetzker/JBa6N/)
+<a href="http://jsfiddle.net/gmetzker/JBa6N/" target="_blank">Live Example</a>
 
 * **this.channelId** in the subscriber method will indicate the current channel.
 
@@ -80,7 +81,7 @@ ob.publish('some.event');
 
 <a name='eventcancel'></a>Event Cancellation
 -----------------
-[Live Example](http://jsfiddle.net/gmetzker/7AZ76/)
+<a href="http://jsfiddle.net/gmetzker/7AZ76/" target="_blank">Live Example</a>
 * Any subscribers can cancel the event for all lower priority subscribers: ``` this.cancel = true;```
 * The result of the publish method indicates if the event was fully published ***(returns true)***, or canceled. ***(returns false)***
 
@@ -108,7 +109,7 @@ if( !complete ) { console.log('force.push failed!'); }
 
 <a name='suborder'></a>Subscriber Order
 ----------------
-[Live Example](http://jsfiddle.net/gmetzker/pPQ4a/)
+<a href="http://jsfiddle.net/gmetzker/pPQ4a/" target="_blank">Live Example</a>
 * Typically subscribers are executed in the order they were added.
 * An optional priority value can be supplied to designate a specific order. ```ob.subscribe(channelId, callback, priority)```.  
 * Priority subscribers are executed in descending order from largest priority subscriber to the smallest.
