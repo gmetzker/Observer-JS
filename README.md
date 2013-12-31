@@ -74,7 +74,7 @@ this.channelId
 
 Event Cancellation
 -----------------
-[Live Example](http://jsfiddle.net/gmetzker/2Cev4/)
+[Live Example](http://jsfiddle.net/gmetzker/7AZ76/)
 * Any subscribers can cancel the event for all lower priority subscribers: ``` this.cancel = true;```
 * The result of the publish method indicates if the event was fully published ***(returns true)***, or canceled. ***(returns false)***
 
