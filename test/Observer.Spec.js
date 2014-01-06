@@ -1,3 +1,7 @@
+/*global describe, it, expect, Observer */
+
+
+//noinspection JSHint,JSLint
 var global = Function('return this')();
 
 describe("dotBox.utility.Observer", function () {
@@ -25,6 +29,7 @@ describe("dotBox.utility.Observer", function () {
             var target;
 
 
+            //noinspection JSLint,JSPotentiallyInvalidConstructorUsage
             target = Observer();
 
             expect(target).not.toBeNull();
@@ -64,7 +69,7 @@ describe("dotBox.utility.Observer", function () {
                 callback,
                 actChannel;
 
-            callback = function someFunc () {
+            callback = function someFunc() {
 
             };
 
@@ -97,11 +102,11 @@ describe("dotBox.utility.Observer", function () {
                 callback2,
                 actChannel;
 
-            callback1 = function someFunc () {
+            callback1 = function someFunc() {
 
             };
 
-            callback2 = function someFunc2 () {
+            callback2 = function someFunc2() {
 
             };
 
@@ -136,11 +141,11 @@ describe("dotBox.utility.Observer", function () {
                 actChannel1,
                 actChannel2;
 
-            callback1 = function someFunc () {
+            callback1 = function someFunc() {
 
             };
 
-            callback2 = function someFunc2 () {
+            callback2 = function someFunc2() {
 
             };
 
@@ -317,7 +322,7 @@ describe("dotBox.utility.Observer", function () {
                 sub1CallCount += 1;
             };
 
-            sub2 = function() {
+            sub2 = function () {
                 sub2CallCount += 1;
             };
 
@@ -356,6 +361,7 @@ describe("dotBox.utility.Observer", function () {
             callBack1 = function () { callArgs1.push(arguments); };
             callBack2 = function () {
                 callArgs2.push(arguments);
+                //noinspection JSUnusedGlobalSymbols
                 this.cancel = true;
             };
             callBack3 = function () { callArgs3.push(arguments); };
@@ -407,7 +413,7 @@ describe("dotBox.utility.Observer", function () {
             expect(callCount1).toBe(1);
             expect(callCount2).toBe(1);
 
-        })
+        });
 
         it("should return false if a subscriber set this.cancel = true", function () {
 
@@ -418,7 +424,10 @@ describe("dotBox.utility.Observer", function () {
 
             target = new Observer();
 
-            sub1 = function() { this.cancel = true; };
+            sub1 = function () {
+                //noinspection JSUnusedGlobalSymbols
+                this.cancel = true;
+            };
 
             target.subscribe(CHANNEL, sub1);
 
@@ -471,7 +480,7 @@ describe("dotBox.utility.Observer", function () {
 
 
             act = function () {
-                target.unsubscribe(CHANNEL_ID, function() {});
+                target.unsubscribe(CHANNEL_ID, function () {});
             };
 
             expect(act).not.toThrow();
@@ -492,7 +501,7 @@ describe("dotBox.utility.Observer", function () {
 
 
             act = function () {
-                target.unsubscribe(CHANNEL_ID, function() {});
+                target.unsubscribe(CHANNEL_ID, function () {});
             };
 
             expect(act).not.toThrow();
@@ -513,7 +522,7 @@ describe("dotBox.utility.Observer", function () {
 
 
             act = function () {
-                target.unsubscribe(CHANNEL_ID, function() {});
+                target.unsubscribe(CHANNEL_ID, function () {});
             };
 
             expect(act).not.toThrow();
@@ -713,8 +722,8 @@ describe("dotBox.utility.Observer", function () {
 
 
             output = '';
-            target.subscribe(CHANNEL, function() { output = output + "1-"; }, 14);
-            target.subscribe(CHANNEL, function() { output = output + "2-"; }, 100);
+            target.subscribe(CHANNEL, function () { output = output + "1-"; }, 14);
+            target.subscribe(CHANNEL, function () { output = output + "2-"; }, 100);
             target.publish(CHANNEL);
 
 

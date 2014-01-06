@@ -30,3 +30,7 @@ test/jasmine-1.3.1/jasmine.js
 .idea/watcherTasks.xml
 
 .idea/libraries/Generated_files.xml
+
+.idea/inspectionProfiles/Project_Default.xml
+
+.idea/*
